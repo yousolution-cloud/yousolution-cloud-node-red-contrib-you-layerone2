@@ -1,0 +1,65 @@
+<script type="text/javascript">
+    RED.nodes.registerType('you-layerone2-adonet-next-link', {
+      category: 'LayerOne2AdoNet',
+      color:"#139ce9",
+      defaults: {
+        name: { value: '' },
+      },
+      inputs: 1,
+      outputs: 2,
+      outputLabels: ['next', 'end'],
+      icon: 'font-awesome/fa-arrows-v',
+      paletteLabel: "AdoNet Next Link",
+      label: function () {
+        return this.name || 'Next link';
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="you-layerone2-adonet-next-link">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name" />
+    </div>
+  </script>
+  
+  <!-- Documentation -->
+  <script type="text/html" data-help-name="you-layerone2-adonet-next-link">
+    <p>Next link</p>
+  
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+      <dt>
+        Name
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the node's name</dd>
+      <dt>
+        NextLink
+        <span class="property-type">string</span>
+      </dt>
+      <dd>the url link to next Adonet Query page</dd>
+    </dl>
+  
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>
+        Standard output
+        <dl class="message-properties">
+          <dt>payload <span class="property-type">msg</span></dt>
+          <dd>It returns the message with next link to the next page.</dd>
+        </dl>
+      </li>
+      <li>
+        Standard output
+        <dl class="message-properties">
+          <dt>payload <span class="property-type">msg</span></dt>
+          <dd>It returns the message when the last page is reached.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>this node is used to get the next page of result of items from Adonet Query.</p>
+  </script>
+  

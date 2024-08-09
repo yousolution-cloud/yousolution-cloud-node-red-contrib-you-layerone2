@@ -1,0 +1,59 @@
+<script type="text/javascript">
+    RED.nodes.registerType('you-layerone2-plugins-list',{
+      category: 'LayerOne2Sys',
+      color:"#139ce9",
+      defaults: {
+        name: {value: ''},
+        //headers: {value: ''},
+        //nextLink: {value: ''},
+        query: {value: 'query={};'}
+      },
+      inputs:1,
+      outputs:1,
+      icon: 'font-awesome/fa-cubes',
+      paletteLabel: "List Plugins",
+      label: function() {
+        return this.name||"Plugins list";
+      },
+      oneditprepare: function() {
+        this.editor = RED.editor.createEditor({
+          id: 'node-input-editor',
+          mode: 'ace/mode/javascript',
+          value: this.query
+        });
+  
+        $("#node-input-headers").typedInput({
+          type:"msg",
+          types:["msg"],
+          typeField: "#node-input-headers-type",
+          value: 'headers'
+        });
+      },
+      oneditsave: function() {
+        this.query = this.editor.getValue();
+        this.editor.destroy();
+        delete this.editor;
+      },
+      oneditcancel: function() {
+        this.editor.destroy();
+        delete this.editor;
+      }
+    });
+  </script>
+    
+  <script type="text/html" data-template-name="you-layerone2-plugins-list">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+      <label for="node-input-editor"><i class="fa fa-database"></i> Query oData</label>
+      <div style="height: 250px; min-height:150px;" class="node-text-editor" id="node-input-editor"></div>
+    </div>
+  </script>
+    
+  <!-- Documentation -->
+  <script type="text/html" data-help-name="you-layerone2-plugins-list">
+    <p>List Plugins</p>
+    
+  </script>

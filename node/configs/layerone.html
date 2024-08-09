@@ -1,0 +1,73 @@
+
+<script type="text/html" data-template-name="you-layerone2">
+    <div class="form-row">
+      <label for="node-config-input-name"><i class="fa fa-name"></i> Name</label>
+      <input type="text" id="node-config-input-name" />
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-host"><i class="fa fa-url"></i> Host</label>
+        <input type="text" id="node-config-input-host" />
+      </div>
+      <div class="form-row">
+        <label for="node-config-input-protocol"><i class="fa fa-cog"></i> Protocol</label>
+        <select name="node-config-input-protocol" id="node-config-input-protocol">
+          <option value="http">HTTP</option>
+          <option value="https">HTTPS</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="node-config-input-port"><i class="fa fa-asterisk"></i> Port</label>
+        <input type="text" id="node-config-input-port" />
+      </div>
+      <div class="form-row">
+        <label for="node-config-input-version"><i class="fa fa-at"></i> Version</label>
+        <input type="text" id="node-config-input-version" />
+      </div>
+      <div class="form-row">
+        <label for="node-config-input-databaseName"><i class="fa fa-database"></i> Database</label>
+        <input type="text" id="node-config-input-databaseName" />
+      </div>
+      <div class="form-row">
+        <label for="node-config-input-companyUser"><i class="fa fa-user"></i> User</label>
+        <input type="text" id="node-config-input-companyUser" />
+      </div>
+      <div class="form-row">
+        <label for="node-config-input-companyPassword"><i class="fa fa-lock"></i> Password</label>
+        <input type="password" id="node-config-input-companyPassword" />
+      </div>
+      <div class="form-row">
+        <label for="node-config-input-consumerIdentity"><i class="fa fa-tag"></i> Identity</label>
+        <input type="text" id="node-config-input-consumerIdentity" />
+      </div>
+  </script>
+  
+  <script type="text/javascript">
+    RED.nodes.registerType('you-layerone2', {
+      category: 'config',
+      color:"#139ce9",
+      icon: 'font-awesome/fa-lock',
+      defaults: {
+        name: { value: '' },
+        protocol: { value: '', required: true },
+        host: { value: '',  required: true },
+        port: { value: '' , validate:RED.validators.number()},
+        version: { value: 'v1' },
+        databaseName: { value: '', required: true },
+        companyUser: { value: '',  required: true },
+        companyPassword: { value: '',  required: true },
+        consumerIdentity: { value: 'NTH',  required: true },
+      },
+      label: function() {
+        return this.host || this.name
+      }
+    });
+  </script>
+
+
+<script type="text/markdown" data-help-name="you-layerone2">
+  
+### you-layerone2
+
+Configuration node. 
+
+</script>

@@ -1,0 +1,75 @@
+{
+  "name": "@yousolution/node-red-contrib-you-layerone2",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "update": "run-script-os",
+    "update:linux:darwin": "npm pack && mv yousolution-node-red-contrib-you-layerone2-$npm_package_version.tgz ./data && cd data && npm i yousolution-node-red-contrib-you-layerone2-$npm_package_version.tgz && docker-compose restart",
+    "update:win32": "npm pack && copy yousolution-node-red-contrib-you-layerone2-%npm_package_version%.tgz .\\data\\ && cd .\\data\\ && npm i yousolution-node-red-contrib-you-layerone2-%npm_package_version%.tgz && docker-compose restart",
+    "update:default": "npm pack && mv yousolution-node-red-contrib-you-layerone2-$npm_package_version.tgz ./data && cd data && npm i yousolution-node-red-contrib-you-layerone2-$npm_package_version.tgz && docker-compose restart"
+  },
+  "author": "Alessio Pellizzaro <alessio.pellizzaro@apserial.it>",
+  "license": "MPL-2.0",
+  "node-red": {
+    "version": ">=2.0.0",
+    "nodes": {
+      "you-layerone2": "node/configs/layerone.js",
+      "you-layerone2-auth": "node/input/auth/auth.js",
+      "you-layerone2-health-check": "node/input/healthCheck/healthCheck.js",
+      "you-layerone2-sl-close": "node/input/sapservicelayer/closeSap.js",
+      "you-layerone2-sl-create": "node/input/sapservicelayer/createSap.js",
+      "you-layerone2-sl-create-sql-query": "node/input/sapservicelayer/createSQLQuery.js",
+      "you-layerone2-sl-crossjoin": "node/input/sapservicelayer/crossJoinSap.js",
+      "you-layerone2-sl-delete": "node/input/sapservicelayer/deleteSap.js",
+      "you-layerone2-sl-get": "node/input/sapservicelayer/getSap.js",
+      "you-layerone2-sl-list": "node/input/sapservicelayer/listSap.js",
+      "you-layerone2-sl-manipolate-entity": "node/input/sapservicelayer/manipulateEntitySap.js",
+      "you-layerone2-sl-next-link": "node/input/sapservicelayer/nextLink.js",
+      "you-layerone2-sl-next-patch": "node/input/sapservicelayer/patchSap.js",
+      "you-layerone2-sl-service": "node/input/sapservicelayer/serviceSap.js",
+      "you-layerone2-sl-sql-query": "node/input/sapservicelayer/SQLQuery.js",
+      "you-layerone2-plugins-get": "node/input/plugins/getPlugins.js",
+      "you-layerone2-plugins-list": "node/input/plugins/listPlugins.js",
+      "you-layerone2-adonet-query": "node/input/adonet/query.js",
+      "you-layerone2-adonet-command": "node/input/adonet/command.js",
+      "you-layerone2-adonet-next-link": "node/input/adonet/nextLink.js",
+      "you-layerone2-adonet-stored-procedure": "node/input/adonet/storedProcedure.js",
+      "you-layerone2-batch-json": "node/input/batch/jsonBatch.js"
+    }
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "node-red",
+    "LayerOne",
+    "NTH",
+    "Innotech",
+    "service layer",
+    "SAP",
+    "API",
+    "ERP",
+    "integration",
+    "YouSolution.cloud"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yousolution-cloud/node-red-contrib-you-layerone2.git"
+  },
+  "devDependencies": {
+    "@types/node-red-node-test-helper": "^0.2.2",
+    "node-red": "^3.0.2",
+    "node-red-node-test-helper": "^0.3.0",
+    "run-script-os": "^1.1.6"
+  },
+  "dependencies": {
+    "ajv": "^8.16.0",
+    "axios": "^1.7.2",
+    "odata-query": "^7.0.6",
+    "uuid": "^10.0.0"
+  }
+}

@@ -1,0 +1,57 @@
+<script type="text/javascript">
+    RED.nodes.registerType('you-layerone2-adonet-query',{
+      category: 'LayerOne2AdoNet',
+      color:"#139ce9",
+      defaults: {
+        name: {value: ''},
+        headers: {value: ''},
+        queryvalue: {value: ''}
+      },
+      inputs:1,
+      outputs:1,
+      icon: 'font-awesome/fa-tasks',
+      paletteLabel: "AdoNet SQL Query",
+      label: function() {
+        return this.name||"AdoNet SQL Query";
+      },
+      oneditprepare: function() {
+        $("#node-input-headers").typedInput({
+          type:"msg",
+          types:["msg"],
+          typeField: "#node-input-headers-type",
+          value: 'headers'
+        });
+
+        $("#node-input-queryvalue").typedInput({
+          type:"msg",
+          types:["msg"],
+          typeField: "#node-input-queryvalue-type",
+          value: 'queryvalue'
+        });
+      },
+    
+    });
+  </script>
+    
+  <script type="text/html" data-template-name="you-layerone2-adonet-query">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-type"><i class="fa fa-gears"></i> Headers</label>
+        <input type="text" id="node-input-headers">
+        <input type="hidden" id="node-input-headers-type">
+      </div>
+      <div class="form-row">
+        <label for="node-input-type"><i class="fa fa-gears"></i> Query</label>
+        <input type="text" id="node-input-queryvalue">
+        <input type="hidden" id="node-input-queryvalue-type">
+      </div>
+  </script>
+    
+  <!-- Documentation -->
+  <script type="text/html" data-help-name="you-layerone2-adonet-query">
+    <p>SQL Query</p>
+    
+  </script>

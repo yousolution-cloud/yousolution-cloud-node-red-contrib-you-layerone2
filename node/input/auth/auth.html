@@ -1,0 +1,89 @@
+<script type="text/javascript">
+    RED.nodes.registerType('you-layerone2-auth',{
+      category: 'LayerOne2',
+      color:"#139ce9",
+      defaults: {
+        layerone: { value: "", type: 'you-layerone2'},
+        name: {value: ''},
+      },
+      inputs:1,
+      outputs:1,
+      icon: 'font-awesome/fa-lock',
+      paletteLabel: "Authenticate",
+      label: function() {
+        return this.name||"LayerOne2 authenticate";
+      },
+    });
+  </script>
+    
+  <script type="text/html" data-template-name="you-layerone2-auth">
+    <div class="form-row">
+        <label for="node-input-layerone"><i class="fa fa-lock"></i> Configs</label>
+        <input type="text" id="node-input-layerone">
+    </div>
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+
+  <!-- Documentation -->
+  <script type="text/html" data-help-name="you-layerone2-auth">
+    <p>Authenticate action</p>
+    <h3>Inputs</h3>
+        <dl class="message-properties">
+            <dt>Name
+              <span class="property-type">string</span>
+            </dt>
+            <dd> the node's name </dd>
+            <dt>Host
+              <span class="property-type">string</span>
+            </dt>
+            <dd> Service layer's hostname </dd>
+            <dt>Port
+              <span class="property-type">number</span>
+            </dt>
+            <dd> Service layer's port </dd>
+            <dt>Company
+              <span class="property-type">string</span>
+            </dt>
+            <dd> Company's name to connect </dd>
+            <dt>User
+              <span class="property-type">string</span>
+            </dt>
+            <dd>Username to connect to the company's database </dd>
+            <dt>Password
+              <span class="property-type">string</span>
+            </dt>
+            <dd>Password to connect to the company's database </dd>
+  
+        </dl>
+    
+     <h3>Outputs</h3>
+         <ol class="node-ports">
+             <li>Standard output
+                 <dl class="message-properties">
+                     <dt>payload <span class="property-type">string</span></dt>
+                     <dd>the standard output of the command.</dd>
+                 </dl>
+             </li>
+         </ol>
+    
+    <h3>Details</h3>
+        <p>this node is used to authenticate to the service layer.
+          See the examples to understand how to use it.
+        </p>
+        <!-- <p><code>msg.payload</code> is used as the payload of the published message.
+        If it contains an Object it will be converted to a JSON string before being sent.
+        If it contains a binary Buffer the message will be published as-is.</p>
+        <p>The topic used can be configured in the node or, if left blank, can be set
+        by <code>msg.topic</code>.</p>
+        <p>Likewise the QoS and retain values can be configured in the node or, if left
+        blank, set by <code>msg.qos</code> and <code>msg.retain</code> respectively.</p> -->
+    
+    <h3>References</h3>
+        <ul>
+            <li><a href="https://sap-samples.github.io/smb-summit-hackathon/b1sl.html" target="_black">Service layer API docs</a> - for more details </li>
+            <li><a href="https://github.com/yousolution-cloud/node-red-contrib-you-sap-service-layer">@yousolution-cloud/node-red-contrib-you-sap-service-layer</a> - the nodes github repository</li>
+        </ul>
+  </script>

@@ -1,0 +1,85 @@
+<script type="text/javascript">
+    RED.nodes.registerType('you-layerone2-batch-json',{
+      category: 'LayerOne2',
+      color:"#139ce9",
+      defaults: {
+        name: {value: ''},
+        headers: {value: ''},
+        bodypost: {value: ''},
+      },
+      inputs:1,
+      outputs:1,
+      icon: 'font-awesome/fa-arrows-alt',
+      paletteLabel: "Json $Batch",
+      label: function() {
+        return this.name||"Json $Batch";
+      },
+      oneditprepare: function() {
+        $("#node-input-headers").typedInput({
+          type:"msg",
+          types:["msg"],
+          typeField: "#node-input-headers-type",
+          value: 'headers'
+        });
+
+        $("#node-input-bodypost").typedInput({
+          type:"msg",
+          types:["msg"],
+          typeField: "#node-input-bodypost-type",
+          value: 'bodypost'
+        });
+      },
+    
+    });
+  </script>
+    
+  <script type="text/html" data-template-name="you-layerone2-batch-json">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-type"><i class="fa fa-gears"></i> Headers</label>
+        <input type="text" id="node-input-headers">
+        <input type="hidden" id="node-input-headers-type">
+      </div>
+      <div class="form-row">
+        <label for="node-input-type"><i class="fa fa-bolt"></i> Body</label>
+        <input type="text" id="node-input-bodypost">
+        <input type="hidden" id="node-input-bodypost-type">
+      </div>
+  </script>
+    
+  <!-- Documentation -->
+  <script type="text/html" data-help-name="you-layerone2-batch-json">
+    <p>Json Batch Request to LayerOne2</p>
+    <p>Example Body</p>
+    <pre>
+        <code>
+            [
+            {
+                "method": "GET",
+                "url": "Login",
+                "headers": {
+                    "content-type": "application/json"
+                }
+            },
+            {
+                "method": "GET",
+                "url": "Login?$select=CompanyUser,SessionStart",
+                "headers": {
+                    "content-type": "application/json"
+                }
+            },
+            {
+                "method": "GET",
+                "url": "Plugins",
+                "headers": {
+                    "content-type": "application/json"
+                }
+            }
+        ]
+        </code>
+    </pre>
+    
+  </script>

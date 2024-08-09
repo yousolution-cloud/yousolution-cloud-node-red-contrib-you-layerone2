@@ -1,0 +1,62 @@
+<script type="text/javascript">
+    RED.nodes.registerType('you-layerone2-adonet-stored-procedure',{
+      category: 'LayerOne2AdoNet',
+      color:"#139ce9",
+      defaults: {
+        name: {value: ''},
+        headers: {value: ''},
+        bodypostvalue: {value: ''},
+        storename : {value: ''}
+      },
+      inputs:1,
+      outputs:1,
+      icon: 'font-awesome/fa-outdent',
+      paletteLabel: "AdoNet SQL StoredProcedure",
+      label: function() {
+        return this.name||"AdoNet SQL StoredProcedure";
+      },
+      oneditprepare: function() {
+        $("#node-input-headers").typedInput({
+          type:"msg",
+          types:["msg"],
+          typeField: "#node-input-headers-type",
+          value: 'headers'
+        });
+
+        $("#node-input-bodypostvalue").typedInput({
+          type:"msg",
+          types:["msg"],
+          typeField: "#node-input-bodypostvalue-type",
+          value: 'bodypostvalue'
+        });
+      },
+    
+    });
+  </script>
+    
+  <script type="text/html" data-template-name="you-layerone2-adonet-stored-procedure">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-storename"><i class="fa fa-paper-plan"></i>StoredProcedureName</label>
+        <input type="text" id="node-input-storename" placeholder="StoredProcedureName">
+      </div>
+    <div class="form-row">
+        <label for="node-input-type"><i class="fa fa-gears"></i> Headers</label>
+        <input type="text" id="node-input-headers">
+        <input type="hidden" id="node-input-headers-type">
+      </div>
+      <div class="form-row">
+        <label for="node-input-type"><i class="fa fa-gears"></i> Body</label>
+        <input type="text" id="node-input-bodypostvalue">
+        <input type="hidden" id="node-input-bodypostvalue-type">
+      </div>
+  </script>
+    
+  <!-- Documentation -->
+  <script type="text/html" data-help-name="you-layerone2-adonet-stored-procedure">
+    <p>StoredProcedure SQL</p>
+    
+  </script>

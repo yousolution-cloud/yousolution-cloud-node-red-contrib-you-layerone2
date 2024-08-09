@@ -1,0 +1,11 @@
+would like to acknowledge the following contributors:
+
+Programming
+-----------
+Alessio Pellizzaro - @apxc
+
+Documentation
+-------------
+
+Localization
+------------

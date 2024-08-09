@@ -1,0 +1,36 @@
+<script type="text/javascript">
+    RED.nodes.registerType('you-layerone2-health-check',{
+      category: 'LayerOne2Sys',
+      color:"#139ce9",
+      defaults: {
+        name: {value: ''},
+        layerone: { value: "", type: 'you-layerone2', required: true},
+      },
+      inputs:1,
+      outputs:1,
+      icon: 'font-awesome/fa-heartbeat',
+      paletteLabel: "Health Check",
+      label: function() {
+        return this.name||"LayerOne2 Health Check";
+      },
+    });
+  </script>
+    
+  <script type="text/html" data-template-name="you-layerone2-health-check">
+    <div class="form-row">
+      <label for="node-input-layerone"><i class="fa fa-lock"></i> Configs</label>
+      <input type="text" id="node-input-layerone">
+  </div>
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+
+  <!-- Documentation -->
+  <script type="text/html" data-help-name="you-layerone2-health-check">
+    <p>Health Check action</p>
+    <h3>Details</h3>
+        <p>this node is used to check status service layer connecting from LayerOne2.
+        </p>
+  </script>
