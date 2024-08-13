@@ -58,7 +58,7 @@
         consumerIdentity: { value: 'NTH',  required: true },
       },
       label: function() {
-        return this.host || this.name
+        return  this.name || ` ${this.databaseName} - ${this.host}`
       }
     });
   </script>

@@ -5,6 +5,7 @@ dist/
 data/*
 !data/.gitkeep
 
+data
 # Compiled Java class files
 *.class
 
