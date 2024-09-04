@@ -16,7 +16,7 @@ module.exports = function (RED) {
       try {
         const options = { method: 'GET', hasRawQuery: true, hasEntityId: true };
         const login = Support.login;
-        const result = await Support.sendRequest({ node, msg, config, axios, login, options });
+        const result = await Support.sendRequest({ node, msg, config, axios, login, options }); 
         msg.payload = VerifyErrorLayerOneSL(node, msg , result.data);
         msg.statusCode = result.status;
         if(msg.payload) {
