@@ -364,7 +364,7 @@ function generateRequestSL(node, msg, config, options) {
   
     if (options.hasEntityId) {
       let entityId = msg[config.entityId];
-      if (!entityId && config.entity != 'UDO' && config.entity != 'UDT') {
+      if (!entityId && config.entity != 'UDO' && config.entity != 'UDT' && config.entity != 'AlternateCatNum') {
         throw new Error('Missing entityId');
       }
       const docEntry = msg[config.docEntry];
@@ -384,7 +384,14 @@ function generateRequestSL(node, msg, config, options) {
       }
   
       if (thickIdApi.includes(entity) || config.entity === 'UDT') {
-        if(Number.isInteger(entityId)) {
+        if(entity === 'AlternateCatNum') { // Manage Special Case AlternateCatNum
+          let ItemCode = msg[config.AlternateCatNumItemId];
+          let CardCode = msg[config.AlternateCatNumCardCodeId];
+          let Substitute = msg[config.AlternateCatNumSubstituteId]
+          url = `${baseUrl}/servicelayer/${entity}(ItemCode='${ItemCode}', CardCode='${CardCode}', Substitute='${Substitute}')`;
+
+        }
+        else if(Number.isInteger(entityId)) {
           url = `${baseUrl}/servicelayer/${entity}(${entityId})`;
         }
         else {
