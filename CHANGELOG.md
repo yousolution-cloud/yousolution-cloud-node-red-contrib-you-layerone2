@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+# [0.0.4] - 2024-10-15
+
+- We have updated NextLinkSl Node on Manage Url Value 
+
 # [0.0.3] - 2024-09-04
 
 - Add Manage AlternateCatNum on LayerOne2SL Get / List / Create / Delete / Update
