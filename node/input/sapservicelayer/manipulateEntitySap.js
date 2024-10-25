@@ -24,9 +24,9 @@ module.exports = function (RED) {
         const options = { method: 'POST', hasRawQuery: false, hasEntityId: true, isManipulate: true, data: data };
         const login = Support.login;
         const result = await Support.sendRequest({ node, msg, config, axios, login, options });
-        msg.payload = VerifyErrorLayerOneSL(node, msg ,result.data);
+        msg.payload = VerifyErrorLayerOneSL(node, msg, result.data);
         msg.statusCode = result.status;
-        if(msg.payload){
+        if (msg.payload) {
           node.status({ fill: 'green', shape: 'dot', text: 'success' });
           node.send(msg);
         }
@@ -37,9 +37,9 @@ module.exports = function (RED) {
     });
   }
 
-  RED.httpAdmin.get('/entities', RED.auth.needsPermission('you-layerone2-sl-manipolate-entity.read'), (req, res) => {
+  RED.httpAdmin.get('/entities', RED.auth.needsPermission('you-layerone2-sl-manipulate-entity.read'), (req, res) => {
     //console.log('entities');
     res.json(entities);
   });
-  RED.nodes.registerType('you-layerone2-sl-manipolate-entity', ManipulateEntitySap, {});
+  RED.nodes.registerType('you-layerone2-sl-manipulate-entity', ManipulateEntitySap, {});
 };
