@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+# [0.0.7] - 2024-11-04
+- Bug Fix build request 
+
+# [0.0.6] - 2024-11-01
+- Upgrade List on CloseSapSl Node 
+
 # [0.0.5] - 2024-10-25
 - Fix valiation field for node-RED >= 3.1.1
 

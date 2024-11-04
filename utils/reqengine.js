@@ -397,9 +397,13 @@ function generateRequestSL(node, msg, config, options) {
         else {
           url = `${baseUrl}/servicelayer/${entity}('${entityId}')`;
         }
-        
       } else {
-        url = `${baseUrl}/servicelayer/${entity}(${entityId})`;
+        if(Number.isInteger(entityId)){
+          url = `${baseUrl}/servicelayer/${entity}(${entityId})`;
+        }
+        else {
+          url = `${baseUrl}/servicelayer/${entity}('${entityId}')`;
+        }
       }
   
       if (options.isClose) {
