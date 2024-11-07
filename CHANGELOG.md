@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+# [0.0.8] - 2024-11-04
+- Fix compatibility on you-layerone2-sl-service and you-layerone2-sl-manipulate-entity
+
 # [0.0.7] - 2024-11-04
 - Bug Fix build request 
 

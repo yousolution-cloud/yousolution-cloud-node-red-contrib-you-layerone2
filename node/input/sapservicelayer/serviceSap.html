@@ -1,10 +1,10 @@
 <script type="text/javascript">
-  let servicesName = [];
-  let servicesData = {};
+  let LY2servicesName = [];
+  let LY2servicesData = {};
     $.getJSON('services', (data, status) => {
       for(service in data) {
-        servicesData = data;
-        servicesName.push(service);
+        LY2servicesData = data;
+        LY2servicesName.push(service);
       }
     });
   RED.nodes.registerType('you-layerone2-sl-service',{
@@ -38,7 +38,7 @@
         typeField: "#node-input-bodyPost-type",
         value: 'bodyPost'
       });
-      servicesName.forEach((service) => {
+      LY2servicesName.forEach((service) => {
         $('#node-input-serviceName')
           .append($("<option></option>")
                       .attr("value", service)
@@ -56,8 +56,8 @@
 
         $('#node-input-service').empty();
 
-        if(servicesData[service]) {
-          servicesData[service].forEach((endpoint) => {
+        if(LY2servicesData[service]) {
+          LY2servicesData[service].forEach((endpoint) => {
           $('#node-input-service')
             .append($("<option></option>")
                         .attr("value", endpoint)
