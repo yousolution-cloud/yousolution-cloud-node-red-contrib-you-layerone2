@@ -1,6 +1,6 @@
 {
   "name": "@yousolution/node-red-contrib-you-layerone2",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "update:win32": "npm pack && copy yousolution-node-red-contrib-you-layerone2-%npm_package_version%.tgz .\\data\\ && cd .\\data\\ && npm i yousolution-node-red-contrib-you-layerone2-%npm_package_version%.tgz && docker-compose restart",
     "update:default": "npm pack && mv yousolution-node-red-contrib-you-layerone2-$npm_package_version.tgz ./data && cd data && npm i yousolution-node-red-contrib-you-layerone2-$npm_package_version.tgz && docker-compose restart"
   },
-  "author": "Alessio Pellizzaro <alessio.pellizzaro@apserial.it>",
+  "author": "Alessio Pellizzaro <alessio.pellizzaro@innotech.email>",
   "license": "MPL-2.0",
   "node-red": {
     "version": ">=2.0.0",
