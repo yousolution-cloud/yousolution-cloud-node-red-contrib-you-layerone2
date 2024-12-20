@@ -119,7 +119,6 @@ async function AdoNetQuery(node, msg, configs, options){
   let baseUrl = buildBaseUrlPlugins(currentelayeroneConfigs,pluginName);
   let data = {};
 
-
   let globalName = `${PREFIXNAME}_${pluginName}_${node.id}`;
   if(options.setup == 'QUERY') {
     if(rawQuery && !msg["nextLink"]) {
@@ -140,17 +139,10 @@ async function AdoNetQuery(node, msg, configs, options){
 
   }
   else if (options.setup == 'COMMAND') {
-    if(rawQuery && !msg["nextLink"]) {
-      url = `${baseUrl}/Command`;
-      globalContext.set(globalName,{
-        query : rawQuery,
-      });
-
-    }
-    else {
-      url = msg["nextLink"];
-        rawQuery = globalContext.get(globalName).query;
-    }
+    url = `${baseUrl}/Command`;
+    globalContext.set(globalName,{
+      query : rawQuery,
+    });
     data.query = rawQuery;
   }
   else if(options.setup == 'STORE') {
