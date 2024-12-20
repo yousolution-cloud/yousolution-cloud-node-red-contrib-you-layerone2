@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+# [0.0.9] - 2024-11-04
+- Fix sender request on node you-layerone2-adonet-command
+
 # [0.0.8] - 2024-11-04
 - Fix compatibility on you-layerone2-sl-service and you-layerone2-sl-manipulate-entity
 

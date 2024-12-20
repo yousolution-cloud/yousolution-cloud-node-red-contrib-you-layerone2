@@ -11,7 +11,7 @@ module.exports = function (RED) {
     node.on('input', async (msg, send, done) => {
       try {
         let options = { setup : 'COMMAND'};
-        config.query = msg[config.query];
+        config.query = msg[config.queryprop];
         let result = await Support.AdoNetQuery(node, msg, config, options);
         msg.payload = VerifyErrorLayerOneSL(node, msg , result.data);
         msg.nextLink = result.data['odata.nextLink'] || result.data['@odata.nextLink'];
