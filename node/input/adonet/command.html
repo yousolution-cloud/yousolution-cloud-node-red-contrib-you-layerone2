@@ -5,7 +5,7 @@
       defaults: {
         name: {value: ''},
         headers: {value: ''},
-        query: {value: ''}
+        queryprop: {value: ''}
       },
       inputs:1,
       outputs:1,
@@ -22,10 +22,10 @@
           value: 'headers'
         });
 
-        $("#node-input-query").typedInput({
+        $("#node-input-queryprop").typedInput({
           type:"msg",
           types:["msg"],
-          typeField: "#node-input-query-type",
+          typeField: "#node-input-queryprop-type",
           value: 'query'
         });
       },
@@ -45,8 +45,8 @@
       </div>
       <div class="form-row">
         <label for="node-input-type"><i class="fa fa-gears"></i> Command/Write Query</label>
-        <input type="text" id="node-input-query">
-        <input type="hidden" id="node-input-query-type">
+        <input type="text" id="node-input-queryprop">
+        <input type="hidden" id="node-input-queryprop-type">
       </div>
   </script>
     
