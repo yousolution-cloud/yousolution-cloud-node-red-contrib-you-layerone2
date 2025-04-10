@@ -5,7 +5,8 @@
       defaults: {
         name: {value: ''},
         headers: {value: ''},
-        queryvalue: {value: ''}
+        queryvalue: {value: ''},
+        manageError: {value: true}
       },
       inputs:1,
       outputs:1,
@@ -48,6 +49,10 @@
         <input type="text" id="node-input-queryvalue">
         <input type="hidden" id="node-input-queryvalue-type">
       </div>
+    <div class="form-row">
+      <label for="node-input-type"><i class="fa fa-cog"></i> Manage Error</label>
+      <input type="checkbox" id="node-input-manageError">
+    </div>
   </script>
     
   <!-- Documentation -->

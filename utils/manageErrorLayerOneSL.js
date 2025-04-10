@@ -15,7 +15,7 @@ function VerifyErrorLayerOneSL (node, msg, response, consentEmpty=false) {
         }
         else {
             msg.payload = response;
-            node.error(response.reason , msg)
+            node.error(response , msg)
             node.status({ fill: 'red', shape: 'dot', text: JSON.stringify(response) });
         }
         
