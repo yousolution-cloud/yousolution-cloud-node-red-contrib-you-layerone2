@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+# [0.0.10] - 2025-04-10
+- Added error handling configuration from library or manual on you-layerone2-adonet-query
+- General Bug Fix on you-layerone2-adonet-query 
+
 # [0.0.9] - 2024-11-04
 - Fix sender request on node you-layerone2-adonet-command
 
