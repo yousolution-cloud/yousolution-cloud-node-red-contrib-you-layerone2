@@ -1,6 +1,6 @@
 {
   "name": "@yousolution/node-red-contrib-you-layerone2",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "",
   "main": "index.js",
   "scripts": {

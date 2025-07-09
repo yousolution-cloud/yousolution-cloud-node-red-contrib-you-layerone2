@@ -16,20 +16,13 @@ module.exports = function (RED) {
       node.status({});
       try {
         const data = msg[config.bodyPost];
-        // if (!data) {
-        //   node.status({ fill: 'red', shape: 'dot', text: 'bodyPatch must have value' });
-        //   done(new Error('bodyPatch must have value'));
-        //   return;
-        // }
         const options = { method: 'POST', hasRawQuery: false, hasEntityId: true, isManipulate: true, data: data };
         const login = Support.login;
         const result = await Support.sendRequest({ node, msg, config, axios, login, options });
-        msg.payload = VerifyErrorLayerOneSL(node, msg, result.data);
+        msg.payload = VerifyErrorLayerOneSL(node, msg, result.data, true);
         msg.statusCode = result.status;
-        if (msg.payload) {
-          node.status({ fill: 'green', shape: 'dot', text: 'success' });
-          node.send(msg);
-        }
+        node.status({ fill: 'green', shape: 'dot', text: 'success' });
+        node.send(msg);
       } catch (error) {
         node.status({ fill: 'red', shape: 'dot', text: 'Error' });
         done(error);
