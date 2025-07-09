@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+# [0.0.11] - 2025-07-09
+- General Bug Fix on you-layerone2-sl-manipolate-entity and you-layerone2-sl-close 
+
 # [0.0.10] - 2025-04-10
 - Added error handling configuration from library or manual on you-layerone2-adonet-query
 - General Bug Fix on you-layerone2-adonet-query 
