@@ -14,6 +14,8 @@
       AlternateCatNumItemId: { value: '', validate: (v) => true },
       AlternateCatNumCardCodeId: { value: '', validate: (v) => true },
       AlternateCatNumSubstituteId: { value: '', validate: (v) => true },
+      SpecialPricesItemId: { value: '', validate: (v) => true },
+      SpecialPricesCardCodeId: { value: '', validate: (v) => true },
     },
     inputs: 1,
     outputs: 1,
@@ -51,6 +53,20 @@
         value: 'AlternateCatNumSubstituteId',
       });
 
+       $('#node-input-SpecialPricesItemId').typedInput({
+        type: 'msg',
+        types: ['msg'],
+        typeField: '#node-input-SpecialPricesItemId-type',
+        value: 'SpecialPricesItemId',
+      });
+
+      $('#node-input-SpecialPricesCardCodeId').typedInput({
+        type: 'msg',
+        types: ['msg'],
+        typeField: '#node-input-SpecialPricesCardCodeId-type',
+        value: 'SpecialPricesCardCodeId',
+      });
+
       $('#node-input-docEntry').typedInput({
         type: 'msg',
         types: ['msg'],
@@ -71,6 +87,11 @@
         jQuery('#container-udt').hide();
         jQuery('#container-code').hide();
         jQuery('#container-entityId').show();
+        jQuery('#container-AlternateCatNumItemId').hide();
+        jQuery('#container-AlternateCatNumCardCodeId').hide();
+        jQuery('#container-AlternateCatNumSubstituteId').hide();
+        jQuery('#container-SpecialPricesItemId').hide();
+        jQuery('#container-SpecialPricesCardCodeId').hide();
 
         if (jQuery(this).val() === 'UDO') {
           jQuery('#container-udo').show();
@@ -85,11 +106,18 @@
           jQuery('#container-AlternateCatNumCardCodeId').show();
           jQuery('#container-AlternateCatNumSubstituteId').show();
         }
+        if (jQuery(this).val() === 'SpecialPrices') {
+          jQuery('#container-SpecialPricesItemId').show();
+          jQuery('#container-SpecialPricesCardCodeId').show();
+        }
         if (
           jQuery(this).val() !== 'UDO' ||
-          (jQuery(this).val() !== 'UDT' && jQuery(this).val() !== 'AlternateCatNum')
+          (jQuery(this).val() !== 'UDT' && jQuery(this).val() !== 'AlternateCatNum' && jQuery(this).val() !== 'SpecialPrices')
         ) {
           jQuery('#container-entityId').hide();
+        }
+        if(jQuery(this).val() === 'Drafts'){
+          jQuery('#container-entityId').show();
         }
       });
     },
@@ -280,6 +308,7 @@
       <option value="ServiceGroups">ServiceGroups</option>
       <option value="ShippingTypes">ShippingTypes</option>
       <option value="StockTransfers">StockTransfers</option>
+      <option value="SpecialPrices">SpecialPrices</option>
       <option value="TargetGroups">TargetGroups</option>
       <option value="TaxCodeDeterminations">TaxCodeDeterminations</option>
       <option value="TaxWebSites">TaxWebSites</option>
@@ -295,6 +324,7 @@
       <option value="UserPermissionTree">UserPermissionTree</option>
       <option value="Users">Users</option>
       <option value="UserTablesMD">UserTablesMD</option>
+      <option value="UserFieldsMD">UserFieldsMD</option>
       <option value="ValueMapping">ValueMapping</option>
       <option value="VatGroups">VatGroups</option>
       <option value="Warehouses">Warehouses</option>
@@ -336,6 +366,19 @@
     <input type="hidden" id="node-input-AlternateCatNumSubstituteId-type" />
   </div>
   <!-- End Section for Manage Special Case AlternateCatNum-->
+
+    <!-- Init Section for Manage Special Case SpecialPrices-->
+  <div class="form-row" style="display:none" id="container-SpecialPricesItemId">
+    <label for="node-input-type"><i class="fa fa-key"></i> ItemCode</label>
+    <input type="text" id="node-input-SpecialPricesItemId" />
+    <input type="hidden" id="node-input-SpecialPricesItemId-type" />
+  </div>
+  <div class="form-row" style="display:none" id="container-SpecialPricesCardCodeId">
+    <label for="node-input-type"><i class="fa fa-key"></i> CardCode</label>
+    <input type="text" id="node-input-SpecialPricesCardCodeId" />
+    <input type="hidden" id="node-input-SpecialPricesCardCodeId-type" />
+  </div>
+  <!-- End Section for Manage Special Case SpecialPrices-->
 
   <div class="form-row" style="display:none" id="container-entityId">
     <label for="node-input-type"><i class="fa fa-key"></i> EntityId</label>

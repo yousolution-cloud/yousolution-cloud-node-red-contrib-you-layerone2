@@ -52,6 +52,10 @@ const thickIdApi = [
     'ReportTypes',
     'Resources',
     'SalesTaxCodes',
+    "SpecialPrices",
+    "StockTransferDrafts",
+    "StockTransfers",
+    "Substitute",
     'TargetGroups',
     'TaxInvoiceReport',
     'TransactionCodes',
@@ -95,13 +99,23 @@ async function JsonBatch(node, msg, configs){
       }))
     };
 
+
+    let ConfigsHeaders = currentelayeroneConfigs.headers ? currentelayeroneConfigs.headers.reduce((acc, header) => {
+    // Se keyValue è vuoto, usa keyType come chiave
+    const key = header.keyValue === "" ? header.keyType : header.keyValue;
+    const value = header.valueValue;
+    
+    acc[key] = value;
+    return acc;
+    }, {}) : {};
+
     url = `${baseUrl}/$batch`;
     let axiosOptions = {
       method: "POST",
       url: url,
       rejectUnauthorized: false,
       withCredentials: true,
-      headers: {...headers, ...msg[configs.headers]},
+      headers: {...ConfigsHeaders , ...headers, ...msg[configs.headers]},
       data: data  
     };
   
@@ -118,6 +132,15 @@ async function AdoNetQuery(node, msg, configs, options){
   let rawQuery = configs.query;
   let baseUrl = buildBaseUrlPlugins(currentelayeroneConfigs,pluginName);
   let data = {};
+
+  let ConfigsHeaders = currentelayeroneConfigs.headers ? currentelayeroneConfigs.headers.reduce((acc, header) => {
+    // Se keyValue è vuoto, usa keyType come chiave
+    const key = header.keyValue === "" ? header.keyType : header.keyValue;
+    const value = header.valueValue;
+    
+    acc[key] = value;
+    return acc;
+    }, {}) : {};
 
   let globalName = `${PREFIXNAME}_${pluginName}_${node.id}`;
   if(options.setup == 'QUERY') {
@@ -160,11 +183,10 @@ async function AdoNetQuery(node, msg, configs, options){
     url: url,
     rejectUnauthorized: false,
     withCredentials: true,
-    headers: {...headers, ...msg[configs.headers]},
+    headers: {...ConfigsHeaders ,...headers, ...msg[configs.headers]},
     data: data  
   };
 
-  //axiosOptions = { ...axiosOptions,  };
   return await axios(axiosOptions);
 
 }
@@ -176,11 +198,21 @@ async function HealthCheck(node, conf ,databaseName) {
     }
     let url =  `${buildBaseUrl(conf)}/HealthCheck?databaseName=${databaseName.trim()}`;
 
+    let ConfigsHeaders = conf.headers ? conf.headers.reduce((acc, header) => {
+    // Se keyValue è vuoto, usa keyType come chiave
+    const key = header.keyValue === "" ? header.keyType : header.keyValue;
+    const value = header.valueValue;
+    
+    acc[key] = value;
+    return acc;
+    }, {}) : {};
+
     const options = {
       method: 'GET',
       url: url,
       rejectUnauthorized: false,
       headers: {
+        ...ConfigsHeaders,
         'Content-Type': 'application/json',
       },
   };
@@ -194,6 +226,15 @@ async function Plugins(node, msg, configs, options) {
   let url;
   let rawQuery = configs.query;
   let baseUrl = buildBaseUrl(currentelayeroneConfigs);
+
+  let ConfigsHeaders = currentelayeroneConfigs.headers ? currentelayeroneConfigs.headers.reduce((acc, header) => {
+    // Se keyValue è vuoto, usa keyType come chiave
+    const key = header.keyValue === "" ? header.keyType : header.keyValue;
+    const value = header.valueValue;
+    
+    acc[key] = value;
+    return acc;
+    }, {}) : {};
 
 
   if(options.setup == 'OBJECT') {
@@ -214,7 +255,10 @@ async function Plugins(node, msg, configs, options) {
       url: url,
       rejectUnauthorized: false,
       withCredentials: true,
-      headers: headers,
+      headers: {
+        ...ConfigsHeaders,
+        ...headers,
+      },
     };
   
     if (options.data) {
@@ -224,7 +268,7 @@ async function Plugins(node, msg, configs, options) {
 }
 
 
-async function Login(node, Configs) {
+async function Login(node, Configs, headers = {}) {
     let url = `${buildBaseUrl(Configs)}/Login`
     const data = { 
         "databaseName": Configs.databaseName,
@@ -233,13 +277,28 @@ async function Login(node, Configs) {
         "consumerIdentity": Configs.consumerIdentity,
      };
 
+     let ConfigsHeaders = Configs.headers ? Configs.headers.reduce((acc, header) => {
+        // Se keyValue è vuoto, usa keyType come chiave
+        const key = header.keyValue === "" ? header.keyType : header.keyValue;
+        const value = header.valueValue;
+        
+        acc[key] = value;
+        return acc;
+        }, {}) : {};
+
+
     const options = {
         method: 'POST',
+        timeout: Configs.timeOut || 120000,
         url: url,
         rejectUnauthorized: false,
         data: data,
         headers: {
           'Content-Type': 'application/json',
+          // Static Headers from Configs
+          ...ConfigsHeaders,
+          // Custom form Msg
+          ...headers
         },
     };
 
@@ -251,13 +310,14 @@ async function Login(node, Configs) {
 function getSapParams(node, msg) {
   try {
     let globalContext = node.context().global;
-    let idAuthNode = msg[PREFIXNAME].lyc;
-    let globalName = `${PREFIXNAME}_${idAuthNode}`;
+    let globalName = msg[PREFIXNAME].id;
     let currentelayeroneConfigs = globalContext.get(globalName);
+    return { 
+      idLayerOneConfigs: currentelayeroneConfigs.id, 
+      currentelayeroneConfigs: currentelayeroneConfigs.configs, 
+      headers: currentelayeroneConfigs.headers 
+    };    
 
-    //node.log(JSON.stringify(currentelayeroneConfigs.headers, null, 4));
-   // let headers = currentelayeroneConfigs.headers;
-    return { idLayerOneConfigs: currentelayeroneConfigs.layeroneConfigs, currentelayeroneConfigs: currentelayeroneConfigs.configs, headers: currentelayeroneConfigs.headers };
   } catch (error) {
     node.error('You Not Authenticate', msg);
 
@@ -356,7 +416,7 @@ function generateRequestSL(node, msg, config, options) {
   
     if (options.hasEntityId) {
       let entityId = msg[config.entityId];
-      if (!entityId && config.entity != 'UDO' && config.entity != 'UDT' && config.entity != 'AlternateCatNum') {
+      if (!entityId && config.entity != 'UDO' && config.entity != 'UDT' && config.entity != 'AlternateCatNum' && config.entity != 'SpecialPrices') {
         throw new Error('Missing entityId');
       }
       const docEntry = msg[config.docEntry];
@@ -381,6 +441,12 @@ function generateRequestSL(node, msg, config, options) {
           let CardCode = msg[config.AlternateCatNumCardCodeId];
           let Substitute = msg[config.AlternateCatNumSubstituteId]
           url = `${baseUrl}/servicelayer/${entity}(ItemCode='${ItemCode}', CardCode='${CardCode}', Substitute='${Substitute}')`;
+
+        }
+        else if(entity === 'SpecialPrices') { // Manage Special Case SpecialPrices
+          let ItemCode = msg[config.SpecialPricesItemId];
+          let CardCode = msg[config.SpecialPricesCardCodeId];
+          url = `${baseUrl}/servicelayer/${entity}(CardCode='${CardCode}', ItemCode='${ItemCode}')`;
 
         }
         else if(Number.isInteger(entityId)) {
@@ -437,11 +503,21 @@ function generateRequestSL(node, msg, config, options) {
       url = `${url}${urlOdata}`;
     }
 
+    let ConfigsHeaders = currentelayeroneConfigs.headers ? currentelayeroneConfigs.headers.reduce((acc, header) => {
+        // Se keyValue è vuoto, usa keyType come chiave
+        const key = header.keyValue === "" ? header.keyType : header.keyValue;
+        const value = header.valueValue;
+        
+        acc[key] = value;
+        return acc;
+        }, {}) : {};
 
-    const headersMerge = { ...msg[config.headers], ...headers};
-  
+
+
+    const headersMerge = { ...ConfigsHeaders, ...msg[config.headers], ...headers};
     let axiosOptions = {
       method: options.method,
+      timeout: config.timeOut || 120000,
       url: url,
       rejectUnauthorized: false,
       withCredentials: true,
@@ -457,8 +533,6 @@ function generateRequestSL(node, msg, config, options) {
       idLayerOneConfigs: idLayerOneConfigs,
     };
   }
-
-
 
 
   async function sendRequest({ node, msg, config, axios, login, options }) {

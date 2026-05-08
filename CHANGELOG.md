@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+# [0.1.2] - 2026-05-07
+- General Bug Fix
+
+# [0.1.1] - 2026-02-12
+- Add Manage SpecialPrices on LayerOne2SL Get / List / Create / Delete / Update
+
+# [0.1.0] - 2025-08-19
+- Add Manage Dynamic Login on LayerOneConfigs and manage CustomHeader on configuration
+> *Warning Breaking Change!* please make backups of flows & Configuration and try in test environment before upgrading
+- Add Manage NextLink on ServiceNode
+> the node ServiceNode does *not manage “NextLink” directly* as it is very case-dependent, the property is provided and *delegated to the flow for management*
+- Bug fix view on PatchSAP Node
+- General Bug Fix
+- Library Axios & Odata Updated
+
+# [0.0.12] - 2025-08-06
+- add Manage UserFieldsMD on you-layerone2-sl-create / you-layerone2-sl-list / you-layerone2-sl-delete 
+> Not add Manage on you-layerone2-sl-get becose not work on corrent ServiceLayer Version
+
 # [0.0.11] - 2025-07-09
 - General Bug Fix on you-layerone2-sl-manipolate-entity and you-layerone2-sl-close 
 

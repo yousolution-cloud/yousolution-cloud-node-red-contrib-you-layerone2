@@ -18,6 +18,10 @@ module.exports = function (RED) {
         } else {
           node.log('NextLink OK for LayerOne');
         }
+
+         if(msg.nextLink.includes('QueryService_PostQuery') ){  // Specific for QueryService_PostQuery 
+          msg.nextLink = msg.nextLink.replace('QueryService_PostQuery?', "").trim();
+          }
       }
 
       if (!nextLink) {

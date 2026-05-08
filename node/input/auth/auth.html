@@ -5,6 +5,11 @@
       defaults: {
         layerone: { value: "", type: 'you-layerone2'},
         name: {value: ''},
+        entity: {value: ''},
+        entitydynamics: {value : ''},
+        configsid: {value : '', validate: (v) => true},
+        paramsprops: {value : '', validate: (v) => true },
+        headers: {value: '', validate: (v) => true},
       },
       inputs:1,
       outputs:1,
@@ -13,14 +18,161 @@
       label: function() {
         return this.name||"LayerOne2 authenticate";
       },
+      oneditprepare: function () {
+        $("#node-input-headers").typedInput({
+        type:"msg",
+        types:["msg"],
+        typeField: "#node-input-headers-type",
+        value: 'headers'
+        });
+        $("#node-input-configsid").typedInput({
+        type:"msg",
+        types:["msg"],
+        typeField: "#node-input-configsid-type",
+        value: 'configsid'
+      });
+        $("#node-input-paramsprops").typedInput({
+        type:"msg",
+        types:["msg"],
+        typeField: "#node-input-paramsprops-type",
+        value: 'paramsprops'
+      });
+      
+        // Funzione per aggiornare la visibilità dei campi
+        function updateVisibility() {
+          const entityValue = jQuery("#node-input-entity").val();
+          const entityDynamicsValue = jQuery("#node-input-entitydynamics").val();
+          
+          // Nascondi tutti i campi inizialmente
+          jQuery('#node-entitydynamics').hide();
+          jQuery('#node-configsid').hide();
+          jQuery('#node-params').hide();
+          jQuery('#node-staticlogin').hide();
+          
+          if (entityValue === 'Static') {
+            jQuery('#node-staticlogin').show();
+          } else if (entityValue === 'Dynamics') {
+            jQuery('#node-entitydynamics').show();
+            jQuery('#node-configsid').show();
+            
+            // Gestisci la sotto-selezione
+            if (entityDynamicsValue === 'Configs') {
+              jQuery('#node-configsid').show();
+              jQuery('#node-params').hide();
+            } else if (entityDynamicsValue === 'Params') {
+              jQuery('#node-configsid').hide();
+              jQuery('#node-params').show();
+            }
+          }
+        }
+
+        // Event handlers
+        jQuery("#node-input-entity").change(function() {
+          updateVisibility();
+        });
+
+        jQuery("#node-input-entitydynamics").change(function() {
+          const entityDynamicsValue = jQuery(this).val();
+          
+          if (entityDynamicsValue === 'Configs') {
+            jQuery('#node-configsid').show();
+            jQuery('#node-params').hide();
+          } else if (entityDynamicsValue === 'Params') {
+            jQuery('#node-configsid').hide();
+            jQuery('#node-params').show();
+          }
+        });
+
+        // IMPORTANTE: Aggiorna la visibilità iniziale dopo che i valori sono stati caricati
+        setTimeout(function() {
+          updateVisibility();
+        }, 100);
+
+      }
     });
   </script>
     
   <script type="text/html" data-template-name="you-layerone2-auth">
     <div class="form-row">
+       <label for="node-input-type"><i class="fa fa-cube"></i> Login Type</label>
+        <select name="node-input-entity" id="node-input-entity">
+          <option value="Static">Static configured</option>
+          <option value="Dynamics">Dynamics configured</option>
+        </select>
+      </div>
+      <!-- Dynamic Login -->
+
+      <div class="form-row" id="node-entitydynamics" style="display:none">
+       <label for="node-input-type-entitydynamics"><i class="fa fa-cube"></i> Dynamics Type</label>
+        <select name="node-input-entitydynamics" id="node-input-entitydynamics">
+          <option value="Configs">Dynamics Configuration</option>
+          <option value="Params">Dynamics Params</option>
+        </select>
+      </div>
+
+      <div id="node-configsid" style="display:none">
+          <div class="form-row" >
+            <label for="node-input-configsid"><i class="fa fa-gears"></i>Props Configs ID</label>
+            <input type="text" id="node-input-configsid">
+            <input type="hidden" id="node-input-configsid-type">
+          </div>
+          <div>
+          <p>
+            Exsample props Configs
+          </p>
+          <pre>
+            <code>
+              msg.params = {
+                config: "482172cc252e1e69"
+              }
+            </code>
+          </pre>
+        </div>
+      </div>
+       
+
+        <div id="node-params" style="display:none">
+        <div class="form-row" id="node-paramsprops">
+          <label for="node-input-paramsprops"><i class="fa fa-gears"></i> Props Params</label>
+          <input type="text" id="node-input-paramsprops">
+          <input type="hidden" id="node-input-paramsprops-type">
+        </div>
+
+        <div>
+          <p>
+            Exsample props Params
+          </p>
+          <pre>
+            <code>
+              msg.params = {
+                  "protocol": "https",
+                  "host": "localhost",
+                  "port": "5051",
+                  "version": "v1",
+                  "databaseName": "SBODemoIT",
+                  "companyUser": "manager",
+                  "companyPassword": "sapb1",
+                  "consumerIdentity": "NTH"
+              }
+            </code>
+          </pre>
+        </div>
+        </div>
+
+      <!-- END Dynamics Login --> 
+      <!-- STATIC LOGIN -->
+    <div class="form-row" id="node-staticlogin">
         <label for="node-input-layerone"><i class="fa fa-lock"></i> Configs</label>
         <input type="text" id="node-input-layerone">
     </div>
+    <!-- END STATIC LOGING-->
+
+    <div class="form-row">
+      <label for="node-input-type"><i class="fa fa-gears"></i> Headers</label>
+      <input type="text" id="node-input-headers">
+      <input type="hidden" id="node-input-headers-type">
+    </div>
+
     <div class="form-row">
       <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
       <input type="text" id="node-input-name" placeholder="Name">
