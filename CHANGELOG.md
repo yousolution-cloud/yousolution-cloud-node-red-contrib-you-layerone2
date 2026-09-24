@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+# [0.1.3] - 2026-09-24
+- Bug Fix you-layerone2 for other libray conflict
+
 # [0.1.2] - 2026-05-07
 - General Bug Fix
 
