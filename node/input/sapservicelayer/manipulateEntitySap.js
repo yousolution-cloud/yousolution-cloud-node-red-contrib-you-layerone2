@@ -31,7 +31,6 @@ module.exports = function (RED) {
   }
 
   RED.httpAdmin.get('/entities', RED.auth.needsPermission('you-layerone2-sl-manipulate-entity.read'), (req, res) => {
-    //console.log('entities');
     res.json(entities);
   });
   RED.nodes.registerType('you-layerone2-sl-manipulate-entity', ManipulateEntitySap, {});

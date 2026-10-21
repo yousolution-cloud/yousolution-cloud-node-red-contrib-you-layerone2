@@ -22,7 +22,6 @@ module.exports = function (RED) {
             }
           };
         });
-        console.log(result.data);
 
         if(config.manageError) {
           msg.payload = VerifyErrorLayerOneSL(node, msg , result.data);

@@ -153,7 +153,7 @@ async function AdoNetQuery(node, msg, configs, options){
 
     }
     else {
-      url = msg["nextLink"];
+      url =  url = `${baseUrl}/Query${msg["nextLink"]}`; ;
         rawQuery = globalContext.get(globalName).query;
     }
 

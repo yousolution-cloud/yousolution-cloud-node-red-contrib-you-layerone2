@@ -4,8 +4,13 @@ module.exports = function (RED) {
       const node = this;
   
       node.on('input', async (msg) => {
-        const nextLink = msg["nextLink"];
-  
+        let nextLink =msg["nextLink"];
+
+        if(nextLink) {
+          const u = new URL(nextLink);
+          msg.nextLink = u.search;
+        }
+
         if (!nextLink) {
           node.send([null, msg]);
           return;

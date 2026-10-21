@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+# [0.1.4] - 2026-10-21
+- Bug Fix you-layerone2-adonet-next-link on manage url for next query
+
 # [0.1.3] - 2026-09-24
 - Bug Fix you-layerone2 for other libray conflict
 
