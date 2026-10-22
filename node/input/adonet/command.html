@@ -53,5 +53,14 @@
   <!-- Documentation -->
   <script type="text/html" data-help-name="you-layerone2-adonet-command">
     <p>SQL Query Write</p>
-    
+
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+      <dt>payload <span class="property-type">object</span></dt>
+      <dd>the command result.</dd>
+      <dt>nextLink <span class="property-type">string</span></dt>
+      <dd>the link to the next page, undefined when not present.</dd>
+      <dt>nextLinkInfo <span class="property-type">object</span></dt>
+      <dd><code>{ nodeId, nodeType, link }</code> of the node that generated the nextLink.</dd>
+    </dl>
   </script>
