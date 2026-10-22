@@ -55,5 +55,14 @@
   <!-- Documentation -->
   <script type="text/html" data-help-name="you-layerone2-plugins-list">
     <p>List Plugins</p>
-    
+
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+      <dt>payload <span class="property-type">object</span></dt>
+      <dd>the list of plugins.</dd>
+      <dt>nextLink <span class="property-type">string</span></dt>
+      <dd>the link to the next page, undefined on the last page.</dd>
+      <dt>nextLinkInfo <span class="property-type">object</span></dt>
+      <dd><code>{ nodeId, nodeType, link }</code> of the node that generated the nextLink. The link is consumed only by the same node: a link coming from another node is ignored with a warning and the request restarts from the first page.</dd>
+    </dl>
   </script>

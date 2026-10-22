@@ -21,7 +21,7 @@ module.exports = function (RED) {
         const result = await Support.sendRequest({ node, msg, config, axios, login, options });
         msg.payload = VerifyErrorLayerOneSL(node, msg, result.data);
         msg.statusCode = result.status;
-        msg.nextLink = result.data['odata.nextLink'] || result.data['@odata.nextLink'];
+        Support.setNextLink(node, msg, result.data);
         if(msg.payload) {
           node.status({ fill: 'green', shape: 'dot', text: 'success' });
           node.send(msg);

@@ -14,7 +14,7 @@ module.exports = function (RED) {
         config.query = msg[config.queryprop];
         let result = await Support.AdoNetQuery(node, msg, config, options);
         msg.payload = VerifyErrorLayerOneSL(node, msg , result.data);
-        msg.nextLink = result.data['odata.nextLink'] || result.data['@odata.nextLink'];
+        Support.setNextLink(node, msg, result.data);
         msg.statusCode = result.status;
         if(msg.payload) {
           node.status({ fill: 'green', shape: 'dot', text: 'success' });

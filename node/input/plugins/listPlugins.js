@@ -14,7 +14,7 @@ module.exports = function (RED) {
         let options = { setup : 'LIST', data: {}};
         let result = await Support.Plugins(node, msg, config, options);
         msg.payload = VerifyErrorLayerOneSL(node, msg , result.data);
-        msg.nextLink = result.data['odata.nextLink'] || result.data['@odata.nextLink'];
+        Support.setNextLink(node, msg, result.data);
         msg.statusCode = result.status;
         if(msg.payload) {
           node.status({ fill: 'green', shape: 'dot', text: 'success' });

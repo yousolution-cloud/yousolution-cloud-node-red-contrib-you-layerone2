@@ -22,11 +22,10 @@ module.exports = function (RED) {
             }
           };
         });
-        console.log(result.data);
 
         if(config.manageError) {
           msg.payload = VerifyErrorLayerOneSL(node, msg , result.data);
-          msg.nextLink = result.data['odata.nextLink'] || result.data['@odata.nextLink'];
+          Support.setNextLink(node, msg, result.data);
           msg.statusCode = result.status;
           if(msg.payload) {
             node.status({ fill: 'green', shape: 'dot', text: 'success' });
@@ -35,7 +34,7 @@ module.exports = function (RED) {
         }
         else {
           msg.payload = result.data;
-          msg.nextLink = result.data['odata.nextLink'] || result.data['@odata.nextLink'];
+          Support.setNextLink(node, msg, result.data);
           msg.statusCode = result.status;
           node.status({ fill: 'gray', shape: 'dot', text: 'Response Request' });
           node.send(msg);
